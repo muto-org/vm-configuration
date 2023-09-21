@@ -1,0 +1,10 @@
+[Unit]
+Description=Runs vm-monitoring every 10 seconds
+Requires=vm-monitoring.service
+
+[Timer]
+Unit=vm-monitoring.service
+OnCalendar=*-*-* *:*:0/10
+
+[Install]
+WantedBy=timers.target

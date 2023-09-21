@@ -1,0 +1,9 @@
+[Unit]
+Description=Executes the vm-monitoring script
+Wants=vm-monitoring.timer
+
+[Service]
+ExecStart=/usr/local/bin/vm-monitoring
+
+[Install]
+WantedBy=multi-user.target
