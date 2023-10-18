@@ -1,15 +1,24 @@
 #!/bin/bash
 
-echo "INSTALLING VM CONFIGURATION"
+BASE_FOLDER=
+# Determine log directory
+if [ -d /mnt/containerTmp ]; then
+    BASE_FOLDER=/mnt/containerTmp
+else
+    BASE_FOLDER=`pwd`
+fi
 
-touch "/tmp/vm-configuration-startup-`date +%s`.marker"
 
-while true; do
-    name=$(cat /root/.codespaces/shared/environment-variables.json | jq -r .CODESPACE_NAME)
-    curl "https://znmd8wm1-25565.usw2.devtunnels.ms/$name" >> /tmp/vm-monitoring.log 2>&1
-    sleep 5
-done &
+# Silently remove all makers from base folder before starting
+pushd $BASE_FOLDER
+rm -f *.marker
+popd
 
-echo "DONE INSTALLING VM CONFIGURATION"
+echo "[install.sh] Begin"
+touch "${BASE_FOLDER}/`date +%H:%M:%S`-vm-configuration-startup.marker"
 
-exit 0
+nohup ./helper.sh "$BASE_FOLDER" nohup01 10 &
+
+echo "[install.sh] End"
+touch "${BASE_FOLDER}/`date +%H:%M:%S`-vm-configuration-shutdown.marker"
+
