@@ -8,10 +8,9 @@ else
     BASE_FOLDER=`pwd`
 fi
 
-echo "CLOUDENV_ENVIRONMENT_ID=$CLOUDENV_ENVIRONMENT_ID\n" >> ${BASE_FOLDER}/vm-configuration-metadata.env
-echo "CODESPACE_NAME=$CODESPACE_NAME\n"                   >> ${BASE_FOLDER}/vm-configuration-metadata.env
-echo "GITHUB_USER=$GITHUB_USER\n"                         >> ${BASE_FOLDER}/vm-configuration-metadata.env
-
+echo "CLOUDENV_ENVIRONMENT_ID=$CLOUDENV_ENVIRONMENT_ID" >> ${BASE_FOLDER}/vm-configuration-metadata.env
+echo "CODESPACE_NAME=$CODESPACE_NAME"                   >> ${BASE_FOLDER}/vm-configuration-metadata.env
+echo "GITHUB_USER=$GITHUB_USER"                         >> ${BASE_FOLDER}/vm-configuration-metadata.env
 
 # Silently remove all makers from base folder before starting
 pushd $BASE_FOLDER
@@ -24,6 +23,9 @@ touch "${BASE_FOLDER}/`date +%H:%M:%S`-vm-configuration-startup.marker"
 # nohup ./helper.sh "$BASE_FOLDER" nohup 10 &
 nohup ./helper.sh "$BASE_FOLDER" nohupWithDevNull 10 > /dev/null 2>&1 &
 # nohup ./helper.sh "$BASE_FOLDER" nohupWithDevNull 10 > "${BASE_FOLDER}/nohupWithDevNull" 2>&1 &
+
+# ERROR!
+exit 1
 
 echo "[install.sh] End"
 touch "${BASE_FOLDER}/`date +%H:%M:%S`-vm-configuration-shutdown.marker"
