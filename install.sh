@@ -8,9 +8,13 @@ else
     BASE_FOLDER=`pwd`
 fi
 
-echo "CLOUDENV_ENVIRONMENT_ID=$CLOUDENV_ENVIRONMENT_ID" >> ${BASE_FOLDER}/vm-configuration-metadata.env
-echo "CODESPACE_NAME=$CODESPACE_NAME"                   >> ${BASE_FOLDER}/vm-configuration-metadata.env
-echo "GITHUB_USER=$GITHUB_USER"                         >> ${BASE_FOLDER}/vm-configuration-metadata.env
+METADATA_FILE="`date +%H:%M:%S`-vm-configuration-metadata.env"
+echo "CODESPACE_NAME=$CODESPACE_NAME"                   >> "${BASE_FOLDER}/${METADATA_FILE}"
+echo "GITHUB_USER=$GITHUB_USER"                         >> "${BASE_FOLDER}/${METADATA_FILE}"
+
+echo "~~ Printing env ~~"
+env
+echo "~~~~~~~~~~~~~~~~~~"
 
 # Silently remove all makers from base folder before starting
 pushd $BASE_FOLDER
