@@ -24,9 +24,9 @@ touch "${BASE_FOLDER}/`date +%H:%M:%S`-vm-configuration-startup.marker"
 nohup ./helper.sh "$BASE_FOLDER" nohupWithDevNull 10 > /dev/null 2>&1 &
 # nohup ./helper.sh "$BASE_FOLDER" nohupWithDevNull 10 > "${BASE_FOLDER}/nohupWithDevNull" 2>&1 &
 
-# ERROR!
-echo "something bad happening"
-exit 1
+# Uncomment to simulate an ERROR!
+# echo "something bad happening"
+# exit 1
 
 echo "[install.sh] End"
 touch "${BASE_FOLDER}/`date +%H:%M:%S`-vm-configuration-shutdown.marker"
