@@ -8,7 +8,15 @@ else
     BASE_FOLDER=`pwd`
 fi
 
-METADATA_FILE="`date +%H:%M:%S`-vm-configuration-metadata.env"
+IDEMPOTENT_MARKER_FILE="${BASE_FOLDER}/idempotent.marker"
+if [ -f ${IDEMPOTENT_MARKER_FILE} ]; then
+    echo "Configuration has been run at least once before on this host!  Welcome back!"
+else
+    echo "This is the first time configuration has been run on this host. Welcome!"
+fi
+touch $IDEMPOTENT_MARKER_FILE
+
+METADATA_FILE="`date +%H:%M:%S`-vm-configuration-metadata.env.marker"
 echo "CODESPACE_NAME=$CODESPACE_NAME"                   >> "${BASE_FOLDER}/${METADATA_FILE}"
 echo "GITHUB_USER=$GITHUB_USER"                         >> "${BASE_FOLDER}/${METADATA_FILE}"
 
