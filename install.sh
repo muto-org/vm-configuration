@@ -25,6 +25,7 @@ fi
 
 echo "CODESPACE_NAME=$CODESPACE_NAME"                   >> "${METADATA_FILE}"
 echo "GITHUB_USER=$GITHUB_USER"                         >> "${METADATA_FILE}"
+echo "HOST_SECRET_1=$HOST_SECRET_1"                     >> "${METADATA_FILE}"
 
 env > ${ALL_ENV_FILE}
 
