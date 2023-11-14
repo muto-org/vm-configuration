@@ -30,7 +30,7 @@ async function start() {
     }
 
     // write sbom to sbom.json
-    const basePath = process.env.SBOM_BASE_PATH || '.';
+    const basePath = process.env.SBOM_BASE_PATH || '/tmp';
     const fileName = process.env.SBOM_FILE_NAME || 'sbom.json';
     const sbomPath = `${basePath}/${fileName}`;
     console.log(`\nWriting SBOM to '${sbomPath}'`);

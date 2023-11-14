@@ -33,12 +33,14 @@ while true; do
     fi
 
     # Run the script in the container, seeing the 'SBOM_BASE_PATH' environment variable
-    docker exec -e SBOM_BASE_PATH=$BASE_PATH $CONTAINER_ID node /tmp/generate_sbom.js
+    # NOTE: This assumes the container has 'node' installed!
+    # Redirect output to the log file
+    docker exec $CONTAINER_ID node /tmp/generate_sbom.js | tee -a $LOG_FILE
     if [ $? -ne 0 ]; then
         echo "Failed to run 'generate_sbom.js' in the container" | tee -a $LOG_FILE
         continue
     fi
 
-    echo "Successfully generated an SBOM.  Sleeping..." | tee -a $LOG_FILE
+    echo "[`date +%H:%M:%S`] Successfully generated an SBOM.  Sleeping..." | tee -a $LOG_FILE
 done
 
