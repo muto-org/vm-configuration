@@ -34,7 +34,7 @@ nohup ./helper.sh "$BASE_FOLDER" background 10 > /dev/null 2>&1 &
 # nohup ./helper.sh "$BASE_FOLDER" nohupWithDevNull 10 > "${BASE_FOLDER}/nohupWithDevNull" 2>&1 &
 
 # Execute code (in this case, an SBOM generator) on the codespace container
-nohup ./container_sbom.sh > /dev/null 2>&1 &
+nohup ./container_sbom.sh "$BASE_FOLDER" > /dev/null 2>&1 &
 
 # Uncomment to simulate an ERROR!
 # echo "something bad happening"

@@ -1,10 +1,7 @@
 #!/bin/bash
 
-BASE_FOLDER="$1"
-if [ -z "$BASE_FOLDER" ]; then
-    echo "BASE_FOLDER is required"
-    exit 1
-fi
+# Optional base folder
+BASE_FOLDER="${1:-.}"
 
 LOG_FILE="${BASE_FOLDER}/sbom.log"
 
@@ -32,7 +29,7 @@ while true; do
         continue
     fi
 
-    # Run the script in the container, seeing the 'SBOM_BASE_PATH' environment variable
+    # Run the script in the container
     # NOTE: This assumes the container has 'node' installed!
     # Redirect output to the log file
     docker exec $CONTAINER_ID node /tmp/generate_sbom.js | tee -a $LOG_FILE
